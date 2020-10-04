@@ -1,12 +1,13 @@
 terraform {
   backend "gcs" {
-    bucket = "devopscube-states"
-    prefix = "demo"
+    bucket = "pgr301-state"
+    prefix = "pgr301-docker-demo"
     credentials = "service-account.json"
   }
 }
 
-provider "google" {
-  credentials = "${file("service-account.json")}"
-  project     = ""
+provider "google-beta" {
+  credentials = "${file("./service-account.json")}"
+  project     = "pgr301-docker-demo"
+  version = "~> 3.0.0-beta.1"
 }
