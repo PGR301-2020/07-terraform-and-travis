@@ -1,7 +1,9 @@
-# LAB 9 - Terraform i Travis CI pipeline 
+# Terraform fra lokal maskin og i Travis CI pipeline 
 
 I denne oppgaven skal vi se nærmere på terraform, og hvorfan vi bruker HCL til å beskrive infrastruktur. Vi skal også se på
 hvordan terraform lager infrastruktur. Når vi begynner å få oversikt over terraform, skal vi la Travis kjøre infrastrukturkoden. 
+
+## Inst
 
 
 # Terraform og google cloud platform
@@ -31,11 +33,23 @@ resource "google_cloud_run_service" "default" {
       }
     }
   }
+}
 
-  traffic {
-    percent         = 100
-    latest_revision = true
+data "google_iam_policy" "noauth" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "allUsers",
+    ]
   }
+}
+
+resource "google_cloud_run_service_iam_policy" "noauth" {
+  location    = google_cloud_run_service.default.location
+  project     = google_cloud_run_service.default.project
+  service     = google_cloud_run_service.default.name
+
+  policy_data = data.google_iam_policy.noauth.policy_data
 }
 ```
 
