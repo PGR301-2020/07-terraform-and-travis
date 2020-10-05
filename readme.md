@@ -3,12 +3,16 @@
 I denne oppgaven skal vi se nærmere på terraform, og hvorfan vi bruker HCL til å beskrive infrastruktur. Vi skal også se på
 hvordan terraform lager infrastruktur. Når vi begynner å få oversikt over terraform, skal vi la Travis kjøre infrastrukturkoden. 
 
-## Inst
+## Instaler Terraform 
 
-
-# Terraform og google cloud platform
+https://www.terraform.io/downloads.html
 
 ## provider
+
+Terraform er ikke kresen på hva du kaller filer. I praksis vil bare terrafrom ta alle .tf filer i nåværende katalog og lage ett dokument før  
+prosessering starter. 
+
+Lag en fil som du kaller provider.tf
 
 ```hcl-terraform
 provider "google" {
@@ -18,6 +22,8 @@ provider "google" {
   zone        = "us-central1-c"
 }
 ```
+
+Lag en fil du kaller main.tf
 
 ## Resource 
 
@@ -51,6 +57,13 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 
   policy_data = data.google_iam_policy.noauth.policy_data
 }
+```
+
+## Autentiser det mot et GCP prosjekt  
+
+
+```
+gcloud auth application-default login
 ```
 
 ## Operasjoner 
