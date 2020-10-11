@@ -4,29 +4,24 @@ env:
   global:
   - GCP_PROJECT_ID=terraform
   - tf_version=0.12.19
-
 branches:
   only:
-    - master
-
+  - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_ba8f794f8d33_key -iv $encrypted_ba8f794f8d33_iv -in google-key.json.enc -out google-key.json -d
+- openssl aes-256-cbc -K $encrypted_ba8f794f8d33_key -iv $encrypted_ba8f794f8d33_iv
+  -in terraform.enc -out terraform.json -d
 - curl https://sdk.cloud.google.com | bash > /dev/null
 - source "$HOME/google-cloud-sdk/path.bash.inc"
 - gcloud auth activate-service-account --key-file=2google-key.json
 - gcloud config set project "${GCP_PROJECT_ID}"
-
-# Install  terraform
-
 - wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
 - unzip terraform_"$tf_version"_linux_amd64.zip
 - sudo mv terraform /usr/local/bin/
 - rm terraform_"$tf_version"_linux_amd64.zip
-
-
-install: true # no-op
-
+install: true
 script:
-- |
+- |-
   set -ex;
   terraform apply --auto-approve
+dd:
+  secure: R46h2aByG0pYq2OOjeFs+eEX4Eiequ7lxjyTNAmDlzIAJ+aevv3RLkHZ8uLN9ftYHcqA6QmHCLciG+TelCnBAgw62U8BLal9OsP7IWuZ4qY55aT4WxlGBNvvnWVkoXdof0pIF0CxdtWsdIjLDInQev9wAhcbTe2KnancC2aKwV4vE37CRxqZtTwgl8jr03YSOzQnoQK+qMeSFCu9pH6Dsw+IaRF/ytRiNArgcDYzKUBtokHg8dSx7GNmY3DWshha9B0OtBTASe1+FL9PD5RLnHmcC3D6F/iF5PUQErgfMX4MzA/VVInuNrevYa7lGU9Qe13m1cDJv6QvOajYL6g7KReZFtpMUHsT+8YkL/NYO8OEOP4rAyObByng6hTXdFPpP2hG0cHkca/zZYBNmWuY7KH5JlBXGG8M61XSVUCfoOYmkW8iPXVush6PEkacID8NDl5nUiRTQBQHS0B0dVT7H2BwUamwBnafbF+PmucjV/PSWg/araZZw5nTLQ+n8K/VI3N3XDzDGg7RKKcdr9vQ4JSnabiRGOZDdLaGEcRo6Immrb7GXG8gLYAj8my10wUgSpWmnCCyARn9W3rGLfQVvwoIOfL6ErVMOAyh5cKQg15Lw8uOv800AffvgKcn1Q6z4rDRdkS+9ZkNuPzQqk/JjPvvh98D5Ytb7jFfsEq7nlQ=
