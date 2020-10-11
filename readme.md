@@ -61,18 +61,21 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 
 ## Autentiser gcloud mot et GCP prosjekt  
 
+Kjør følgende kommando og velg det samme prosjektet som du har brukt for Docker/Travis øvningen. 
+
 ```
-gcloud auth application-default login
+gcloud init
 ```
 
 ## Operasjoner 
 
 * Prøv ```terraform plan```
 * Prøv ```terraform apply```
-* Endre en egenskap i main.tf 
+* Endre en egenskap i main.tf - prøv for eksempel å bytte container  
 * Prøv ```terraform plan```
 * prøv terraform destroy
 
+Se på state filen for moro skyld. 
 
 # Terraform i pipeline 
 
@@ -83,6 +86,12 @@ For å
 
 Kopier terraform filene i denne dette dokumentet til repoet. 
 
+## Lag en .travis.yml fil
+
+
+
+
+
 ## Lag en service service account
 
 - Lag et nytt prosjekt
@@ -92,11 +101,8 @@ Kopier terraform filene i denne dette dokumentet til repoet.
 - Last ned en nøkkelfil for service account og lagre denne i rotkatalogen til infrastruktur repository
 - DU må ikke COMITTE denne filen!
 
-## Autentiser gcloud CLI med nøkkelfilen
+## Kjør travis encrypt 
 
-``` 
-gcloud auth activate-service-account --key-file=terraform.json
-```
-
+¨
 
 
