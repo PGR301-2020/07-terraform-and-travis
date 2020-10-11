@@ -1,5 +1,3 @@
-services:
-- docker
 env:
   global:
   - GCP_PROJECT_ID=terraform-292215
