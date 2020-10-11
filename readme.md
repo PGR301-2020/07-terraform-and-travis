@@ -59,8 +59,7 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 }
 ```
 
-## Autentiser det mot et GCP prosjekt  
-
+## Autentiser gcloud mot et GCP prosjekt  
 
 ```
 gcloud auth application-default login
@@ -73,3 +72,16 @@ gcloud auth application-default login
 * Endre en egenskap i main.tf 
 * Prøv ```terraform plan```
 * prøv terraform destroy
+
+
+# Terraform i pipeline 
+
+Målet er at vi kun skal Travis eller valgt "CI" verktøy skal gjøre endringer i infrastrukturen. Vi skal kun endre infrastrukturkoden. 
+For å 
+
+## Lag et nytt repository for infrastruktur 
+
+Kopier terraform filene i denne dette dokumentet til repoet. 
+
+## Lag en service 
+
