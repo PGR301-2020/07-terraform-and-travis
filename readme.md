@@ -83,5 +83,20 @@ For å
 
 Kopier terraform filene i denne dette dokumentet til repoet. 
 
-## Lag en service 
+## Lag en service service account
+
+- Lag et nytt prosjekt
+- Lag en ny service account
+- Legg til service account som en "member" i prosjketet
+- Legg til følgende roller til service account; Google Stoeage Admin, Cloud Run Service Agent 
+- Last ned en nøkkelfil for service account og lagre denne i rotkatalogen til infrastruktur repository
+- DU må ikke COMITTE denne filen!
+
+## Autentiser gcloud CLI med nøkkelfilen
+
+``` 
+gcloud auth activate-service-account --key-file=terraform.json
+```
+
+
 
