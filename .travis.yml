@@ -5,12 +5,12 @@ env:
   - GCP_PROJECT_ID=terraform
   - tf_version=0.12.19
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-
 branches:
   only:
   - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_d62ff51cb74a_key -iv $encrypted_d62ff51cb74a_iv -in terraform.json.enc -out terraform.json -d
+- openssl aes-256-cbc -K $encrypted_d62ff51cb74a_key -iv $encrypted_d62ff51cb74a_iv
+  -in terraform.json.enc -out terraform.json -d
 - curl https://sdk.cloud.google.com | bash > /dev/null
 - source "$HOME/google-cloud-sdk/path.bash.inc"
 - gcloud auth activate-service-account --key-file=terraform.json
