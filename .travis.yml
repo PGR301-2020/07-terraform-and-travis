@@ -1,4 +1,4 @@
-  env:
+env:
   global:
   - GCP_PROJECT_ID=terraform-292215
   - tf_version=0.12.19
