@@ -8,7 +8,7 @@ terraform {
 
 provider "google-beta" {
   credentials = "${file("./terraform.json")}"
-  project     = "terraform"
+  project     = "terraform-292215"
   version = "~> 3.0.0-beta.1"
 }
 
