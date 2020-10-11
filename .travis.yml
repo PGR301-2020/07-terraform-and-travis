@@ -4,6 +4,8 @@ env:
   global:
   - GCP_PROJECT_ID=terraform
   - tf_version=0.12.19
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
 branches:
   only:
   - master
