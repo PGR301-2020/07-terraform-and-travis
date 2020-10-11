@@ -1,7 +1,7 @@
 resource "google_cloud_run_service" "hello" {
   name = "cloudrun-srv"
   location = "us-central1"
-  project  = "pgr301-docker-demo"
+  project  = "terraform"
 
   template {
     spec {
