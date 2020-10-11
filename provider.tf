@@ -1,13 +1,13 @@
 terraform {
   backend "gcs" {
     bucket = "pgr301-state"
-    prefix = "pgr301-docker-demo"
-    credentials = "service-account.json"
+    prefix = "terraformstate"
+    credentials = "terraform.json"
   }
 }
 
 provider "google-beta" {
-  credentials = "${file("./service-account.json")}"
-  project     = "pgr301-docker-demo"
+  credentials = "${file("./terraform.json")}"
+  project     = "terraform"
   version = "~> 3.0.0-beta.1"
 }
