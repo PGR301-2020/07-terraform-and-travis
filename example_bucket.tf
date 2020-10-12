@@ -1,6 +1,7 @@
 resource "google_storage_bucket" "static-site" {
-  name          = "glennsdronefootage"
-  location      = "EU"
+  project = "terraform-292215"
+  name = "glennsdronefootage"
+  location = "EU"
 }
 
 
