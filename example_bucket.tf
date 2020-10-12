@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "static-site" {
-  name          = "glennsdronefootage"
+  name          = "glennsawesomedronefootage"
   location      = "EU"
 }
 
