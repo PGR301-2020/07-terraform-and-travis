@@ -84,25 +84,78 @@ For å
 
 ## Lag et nytt repository for infrastruktur 
 
-Kopier terraform filene i denne dette dokumentet til repoet. 
+Kopier terraform filene i dette dokumentet til repoet. 
 
-## Lag en .travis.yml fil
+Du må se over provider.tf og endre 
+
+* Bucket - Du må lage en Google Cloud Storage bucket i prosjektet ditt, og sette navnet inn her
+* credentials - Du må sette inn riktig navn til credentials fil *både* i backend - og provider blokken
+* project - Du må sette inn riktig prosjekt id 
+
+Aktiver Travis for repositoriet. 
 
 
+## Lag et nytt prosjekt og serviceaccount
 
+Jeg anbefaler å lage et nyttt prosjekt for å være sikker på at du kjenner til prosessen. Husk det "vanlige"
 
-
-## Lag en service service account
-
-- Lag et nytt prosjekt
+- Sørg for at prosjektet har billing, ved å besøke "billing" siden i console når du har valgt prosjektet som det aktive i UI. 
+- Velg APIs & services. Sørg for at Container Registry, Cloud Storage og Cloud Run er enabled. 
 - Lag en ny service account
-- Legg til service account som en "member" i prosjketet
-- Legg til følgende roller til service account; Google Stoeage Admin, Cloud Run Service Agent 
+- Legg til service account som en "member" i prosjektet
+- Legg til følgende roller til service account; Google Stoeage Admin, Container Registry Service Agent, Cloud Run Service Agent 
 - Last ned en nøkkelfil for service account og lagre denne i rotkatalogen til infrastruktur repository
 - DU må ikke COMITTE denne filen!
 
+
+## Lag en .travis.yml fil
+
+Du kan bruke følgende som utgangspunkt, og erstatte for egne verdier for <key file> og <your project id> 
+
+```yaml
+env:
+  global:
+  - GCP_PROJECT_ID=<your project id>
+  - tf_version=0.12.19
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+branches:
+  only:
+  - master
+before_install:
+- curl https://sdk.cloud.google.com | bash > /dev/null
+- source "$HOME/google-cloud-sdk/path.bash.inc"
+- gcloud auth activate-service-account --key-file=<key-file>.json
+- gcloud config set project "${GCP_PROJECT_ID}"
+- export GOOGLE_APPLICATION_CREDENTIALS=./<key-file>.json
+- wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
+- unzip terraform_"$tf_version"_linux_amd64.zip
+- sudo mv terraform /usr/local/bin/
+- rm terraform_"$tf_version"_linux_amd64.zip
+install: true
+script:
+- |-
+  set -ex;
+  terraform init
+  terraform plan
+  terraform apply --auto-approve
+  terraform output
+
+```
+
 ## Kjør travis encrypt 
 
-¨
+Legg merke til --add. openssl kommandoen som dekrypterer legges rett inn i .travis.yml filen uten at du trenger å gjøre noe .
+```bash
+ travis encrypt-file terraform.json --add
+```
 
+NB. Hvis du har hatt problemer med Travis Encrypt for Windows er naturligvis løsningen... Docker. Det finnes et Docker image som har travis CLI, og som er basert
+på et Linux OS. Du kan kjøre 
 
+```bash
+docker run -v $(pwd):/project --rm skandyla/travis-cli encrypt-file <some-file> --add 
+``` 
+
+## Forsøk å endre på infrastruktur 
+
+Endringer i infrastrukturen din skal nå kunne gjøres ved å  comitte endringer på master i ditt infrastruktur repository
