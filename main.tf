@@ -1,5 +1,5 @@
 resource "google_cloud_run_service" "hello" {
-  name = "cloudrun-srv"
+  name = "helloworld-service"
   location = "us-central1"
   project = "terraform-292215"
 
