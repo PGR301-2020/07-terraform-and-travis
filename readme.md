@@ -84,7 +84,7 @@ For å
 
 ## Lag et nytt repository for infrastruktur 
 
-Kopier terraform filene i dette dokumentet til repoet. 
+Kopier filene fra dette repositoryet, eller lag en fork 
 
 Du må se over provider.tf og endre 
 
