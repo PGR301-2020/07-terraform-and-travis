@@ -162,11 +162,25 @@ Endringer i infrastrukturen din skal nå kunne gjøres ved å  comitte endringer
 
 ## Del 2: Connect the dots. ..
 
-Det er nå på tide å deploye vår egen applikasjon i cloudrun ved hjelp av Terraform. 
+
+* Det er nå på tide å deploye vår egen applikasjon i Google cloudrun ved hjelp av Terraform og Travis. 
+* Vi skal bruke samme GCP prosjekt for både infrastruktur og kode. 
+* Vi skal ha to repositories, ett for applikasjonen, og ett for infrastruktur. 
+* Nye versjoner av applikasjonen bygges av Travis og et nytt docker image pushes til Google Cloud Registry på hver endring av master branch. 
+* Når man ønsker å legge ut en ny versjon av applikasjonen, endrer man Docker image i Terraform koden for eksempel
+```
+template {
+  spec {
+    containers {
+      image = "gcr.io/terraform-292215/helloworld@sha256:0ee92532317e87faadbe0231986e827605d1d97cbf9acd9c44557f49a416867d"
+    }
+  }
+}
+```
 
 ### Applikasjon
 
-Bruk en oppgave der vi tidligere har bygget en Java applikasjon med maven i docker multi stage. For et eksempel, se på https://github.com/PGR301-2020/01-devops-helloworld 
+Bruk en oppgave der vi tidligere har bygget en Java applikasjon med maven i docker multi stage. For et eksempel, se på https://github.com/PGR301-2020/01-devops-helloworld. 
 
 .travis.yml skal se omtrent slik ut ; 
 
