@@ -159,3 +159,46 @@ docker run -v $(pwd):/project --rm skandyla/travis-cli encrypt-file <some-file> 
 ## Forsøk å endre på infrastruktur 
 
 Endringer i infrastrukturen din skal nå kunne gjøres ved å  comitte endringer på master i ditt infrastruktur repository
+
+## Del 2: Connect the dots. ..
+
+Det er nå på tide å deploye vår egen applikasjon i cloudrun ved hjelp av Terraform. 
+
+### Applikasjon
+
+Bruk en oppgave der vi tidligere har bygget en Java applikasjon med maven i docker multi stage. For et eksempel, se på https://github.com/PGR301-2020/01-devops-helloworld 
+
+.travis.yml skal se omtrent slik ut ; 
+
+```yml
+services:
+- docker
+env:
+  global:
+  - GCP_PROJECT_ID=<gcp-project-id>
+  - IMAGE=gcr.io/<gcp-project-id>/<image-name>
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+before_install:
+- openssl aes-256-cbc -K $encrypted_ba8f794f8d33_key -iv $encrypted_ba8f794f8d33_iv
+  -in <key-json-file>.enc -out <key-json-file> -d
+- curl https://sdk.cloud.google.com | bash > /dev/null
+- source "$HOME/google-cloud-sdk/path.bash.inc"
+- gcloud auth activate-service-account --key-file=<key-json-file>
+- gcloud auth configure-docker
+- gcloud config set project "${GCP_PROJECT_ID}"
+install: true
+script:
+- |-
+  set -ex;
+  docker build -t "${IMAGE}:${TRAVIS_COMMIT}" . && \
+  docker push "${IMAGE}:${TRAVIS_COMMIT}" && \
+  set +x
+```
+
+* Vi må erstatte følgende verdier 
+
+
+
+
+
+
