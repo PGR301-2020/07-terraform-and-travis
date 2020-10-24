@@ -1,6 +1,6 @@
 resource "google_cloud_run_service" "hello" {
   name = "cloudrun-srv"
-  location = "eu-central1"
+  location = "us-central1"
 
   template {
     spec {
