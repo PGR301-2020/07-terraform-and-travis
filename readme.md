@@ -209,10 +209,8 @@ script:
   set +x
 ```
 
-* Vi må erstatte følgende verdier 
+Vi må erstatte følgende verdier 
 
-
-
-
-
-
+* gcp-project-id - Hvilket Google Cloud prosjekt vi skal bruke 
+* image-name - Et navn du velger for et docker image 
+* key-json-file - Navnet på en JSON som inneholdet privat nøkkel lastet ned for en Service Account.
