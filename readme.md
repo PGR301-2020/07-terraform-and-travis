@@ -162,21 +162,23 @@ Endringer i infrastrukturen din skal nå kunne gjøres ved å  comitte endringer
 
 ## Del 2: Connect the dots. ..
 
+### Prøv følgende
 
-* Det er nå på tide å deploye vår egen applikasjon i Google cloudrun ved hjelp av Terraform og Travis. 
-* Vi skal bruke samme GCP prosjekt for både infrastruktur og kode. 
-* Vi skal ha to repositories, ett for applikasjonen, og ett for infrastruktur. 
-* Nye versjoner av applikasjonen bygges av Travis og et nytt docker image pushes til Google Cloud Registry på hver endring av master branch. 
-* Når man ønsker å legge ut en ny versjon av applikasjonen, endrer man Docker image i Terraform koden for eksempel
-```
-template {
-  spec {
-    containers {
-      image = "gcr.io/terraform-292215/helloworld@sha256:0ee92532317e87faadbe0231986e827605d1d97cbf9acd9c44557f49a416867d"
-    }
-  }
-}
-```
+Det er nå på tide å deploye vår egen applikasjon i Google cloudrun ved hjelp av Terraform og Travis.  
+Vi skal bruke samme GCP prosjekt for både infrastruktur og kode. Vi skal ogsså ha to repositories, ett for applikasjonen, og ett for 
+infrastruktur. 
+
+Nye versjoner av applikasjonen bygges av Travis og et nytt docker image pushes til Google Cloud Registry på hver endring av master branch. 
+Når man ønsker å legge ut en ny versjon av applikasjonen, endrer man Docker image i Terraform koden for eksempel.
+
+* lag en endring i applikasjonen, push til master
+* Se at Jenkins jobben til applikasjonen kjører ok
+* Kontroller Google Cloud Registry at det er ny revisjon av container image for applikasjonen 
+* Kopier container image ID, og sett den inn i main.tf i terrafomr koden  under "google_cloud_run_service" ressursen
+* Sjekk at Jenkins jobben for terraform infrastruktur kjører OK
+* Verifiser at applikasjonen
+
+
 
 ### Applikasjon
 
@@ -214,3 +216,17 @@ Vi må erstatte følgende verdier
 * gcp-project-id - Hvilket Google Cloud prosjekt vi skal bruke 
 * image-name - Et navn du velger for et docker image 
 * key-json-file - Navnet på en JSON som inneholdet privat nøkkel lastet ned for en Service Account.
+
+
+### Inrastruktur 
+
+Følgende seksjon i main.tf bestemmer hvilket container image som brukes for cloud run
+```
+template {
+  spec {
+    containers {
+      image = "gcr.io/terraform-292215/helloworld@sha256:0ee92532317e87faadbe0231986e827605d1d97cbf9acd9c44557f49a416867d"
+    }
+  }
+}
+```

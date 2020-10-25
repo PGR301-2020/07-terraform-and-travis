@@ -1,0 +1,3 @@
+variable "logz_token" {
+
+}
