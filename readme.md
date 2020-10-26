@@ -169,7 +169,7 @@ Vi skal bruke samme GCP prosjekt for både infrastruktur og kode. Vi skal ogsså
 infrastruktur. 
 
 Nye versjoner av applikasjonen bygges av Travis og et nytt docker image pushes til Google Cloud Registry på hver endring av master branch. 
-Når man ønsker å legge ut en ny versjon av applikasjonen, endrer man Docker image i Terraform koden for eksempel.
+Når man ønsker å legge ut en ny versjon av applikasjonen, endrer man Docker image i Terraform koden.
 
 * lag en endring i applikasjonen, push til master
 * Se at Jenkins jobben til applikasjonen kjører ok
