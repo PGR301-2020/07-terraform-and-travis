@@ -1,20 +1,26 @@
-resource "google_monitoring_uptime_check_config" "https" {
-  display_name = "https-uptime-check"
-  timeout = "10s"
-  project =  var.project_id
+resource "google_monitoring_uptime_check_config" "http" {
+  display_name = "http-uptime-check"
+  timeout      = "60s"
 
   http_check {
-    path = module.urlparser.path
+    path = "/"
+    request_method = "GET"
   }
 
   monitored_resource {
     type = "uptime_url"
     labels = {
-      project_id =  var.project_id
-      host = module.urlparser.host
+      project_id = "terraform"
+      host       = module.urlparser.host
     }
   }
+
+  content_matchers {
+    content = "example"
+  }
 }
+Open in Cloud Shell
+
 
 module "urlparser" {
   source = "matti/urlparse/external"
