@@ -4,7 +4,7 @@ provider "statuscake" {
 
 resource "statuscake_test" "google" {
   website_name = "My test"
-  website_url  = google_cloud_run_service.hello.status[0].url
+  website_url  = "https://letshopethisdoesnotexistatall.com"
   test_type    = "HTTP"
   check_rate   = 300
   contact_groups = ["Default"]
