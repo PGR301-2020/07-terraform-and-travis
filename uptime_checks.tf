@@ -1,6 +1,7 @@
 resource "google_monitoring_uptime_check_config" "http" {
   display_name = "http-uptime-check"
   timeout      = "60s"
+  project = var.project_id
 
   http_check {
     path = "/"
