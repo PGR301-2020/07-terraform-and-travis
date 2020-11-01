@@ -19,8 +19,6 @@ resource "google_monitoring_uptime_check_config" "http" {
     content = "example"
   }
 }
-Open in Cloud Shell
-
 
 module "urlparser" {
   source = "matti/urlparse/external"
