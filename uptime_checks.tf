@@ -1,6 +1,7 @@
 resource "google_monitoring_uptime_check_config" "https" {
   display_name = "https-uptime-check"
   timeout = "10s"
+  project =  var.project_id
 
   http_check {
     path = module.urlparser.path

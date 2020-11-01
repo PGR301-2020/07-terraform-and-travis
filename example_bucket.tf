@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "static-site" {
-  project = "terraform-292215"
+  project = var.project_id
   name = "glennsawesomedronefootage"
   location = "EU"
 }

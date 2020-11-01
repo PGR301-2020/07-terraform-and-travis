@@ -1,7 +1,7 @@
 resource "google_cloud_run_service" "hello" {
   name = "helloworld-service"
   location = "us-central1"
-  project = "terraform-292215"
+  project = var.project_id
 
   template {
     spec {
