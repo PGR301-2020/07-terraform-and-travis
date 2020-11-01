@@ -8,9 +8,9 @@ resource "google_monitoring_uptime_check_config" "https" {
   }
 
   monitored_resource {
-    project_id =  var.project_id
     type = "uptime_url"
     labels = {
+      project_id =  var.project_id
       host = module.urlparser.host
     }
   }
