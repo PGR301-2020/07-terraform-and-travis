@@ -16,6 +16,6 @@ resource "google_monitoring_uptime_check_config" "https" {
 
 module "urlparser" {
   source = "matti/urlparse/external"
-  url = google_cloud_run_service.hello.status.url
+  url = google_cloud_run_service.hello.status[0].url
 
 }
