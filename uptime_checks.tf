@@ -7,5 +7,5 @@ resource "statuscake_test" "google" {
   website_url = "https://letshopethisdoesnotexistatall.com"
   test_type = "HTTP"
   check_rate = 300
-  contact_group = ["pgr301-glennbech"]
+  contact_group = ["193657"]
 }
