@@ -7,7 +7,7 @@ terraform {
 }
 
 provider "google-beta" {
-  credentials = file("terraforn.json")
+  credentials = file("terraform.json")
   project     = "terraform-292215"
   version = "~> 3.0.0-beta.1"
 }
