@@ -150,7 +150,7 @@ Legg merke til --add. openssl kommandoen som dekrypterer legges rett inn i .trav
 ```
 
 NB. Hvis du har hatt problemer med Travis Encrypt for Windows er naturligvis løsningen... Docker. Det finnes et Docker image som har travis CLI, og som er basert
-på et Linux OS. Du kan kjøre 
+på et Linux OS. Du kan kjøre (feks git bash)
 
 ```bash
 docker run -v $(pwd):/project --rm skandyla/travis-cli encrypt-file <some-file> --add 
